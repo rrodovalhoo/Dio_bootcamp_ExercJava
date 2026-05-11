@@ -2,193 +2,32 @@
 PetMachine
 
 
-[Main.java](https://github.com/user-attachments/files/27605796/Main.java)
-[Pet.java](https://github.com/user-attachments/files/27605797/Pet.java)
-[PetMachine.java](https://github.com/user-attachments/files/27605798/PetMachine.java)
+🐶 PetMachine - Sistema de Banho para Pets
+Este projeto é um simulador de uma máquina de banho automática para animais de estimação, desenvolvido como parte do Bootcamp da DIO. O objetivo principal foi praticar a lógica de programação e os pilares da Programação Orientada a Objetos (POO) em Java.
 
+🛠️ Tecnologias e Conceitos Utilizados
+Linguagem: Java ☕
 
-pacote org.example;
+Encapsulamento: Atributos privados e métodos públicos para garantir a segurança dos dados.
 
-import java.util.Scanner;
+Composição: A classe PetMachine interage diretamente com objetos da classe Pet.
 
-public class Main {
-    private final static Scanner scanner = new Scanner(System.in);
-    private final static PetMachine petMachine = new PetMachine();
+Estruturas de Repetição e Condição: Uso de do-while, switch-case e if/else para controlar o fluxo do sistema.
 
-    public static void main(String[] args) {
-        scanner.useDelimiter("\\n");
-        var op = -1;
+🚿 Funcionalidades
+A máquina possui uma lógica de funcionamento realista:
 
-        do {
-            System.out.println("\n============= MÁQUINA PET ===============");
-            System.out.println("=========== Escolha uma das opções===========\n");
-            System.out.println("1- Dar banho no pet");
-            System.out.println("2- Abastecer a máquina com água");
-            System.out.println("3- Abastecer a máquina com shampoo");
-            System.out.println("4- Verificar água da máquina");
-            System.out.println("5- Verificar shampoo da máquina");
-            System.out.println("6- Verifique se tem pet na máquina");
-            System.out.println("7- Colocar pet na máquina");
-            System.out.println("8- Retirar pet da máquina");
-            System.out.println("9- Limpar a máquina");
-            System.out.println("0- Sair");
+Gestão de Recursos: É necessário monitorar e abastecer os níveis de água 💧 e shampoo 🧴.
 
-            op = scanner.nextInt();
+Verificação de Segurança: O banho só começa se houver um pet na máquina, se ela estiver limpa e se houver insumos suficientes.
 
-            switch (op) {
-                caso 1 -> petMachine.takeAshower();
-                caso 2 -> definirÁgua();
-                caso 3 -> definirShampoo();
-                caso 4 -> verificarÁgua();
-                caso 5 -> verificarShampoo();
-                caso 6 -> verificarSeTemMáquinaDeAnimalDeEstimação();
-                caso 7 -> setPetInPetMachine();
-                caso 8 -> petMachine.removePet();
-                caso 9 -> petMachine.wash();
-                case 0 -> System.out.println("Saindo...");
-                default -> System.out.println("Opção inválida!");
-            }
+Higiene da Máquina: Se um pet sujo for retirado sem tomar banho, a máquina fica suja e precisa de uma limpeza (wash) antes do próximo uso.
 
-        } while (op != 0);
-    }
+📂 Estrutura do Projeto
+O código está dividido em três classes principais:
 
-    private estático void definirÁgua() {
-        petMachine.addWater();
-    }
+Pet: Representa o animal (nome e estado de limpeza).
 
-    private estático void definirShampoo() {
-        petMachine.addShampoo();
-    }
+PetMachine: Contém a inteligência e as regras de negócio da máquina.
 
-    private static void verificarÁgua() {
-        var quantidade = petMachine.getWater();
-        System.out.println("A máquina está com " + quantidade + " Litro(s) de água");
-    }
-
-    private static void verificarXampu() {
-        var amount = petMachine.getShampoo();
-        System.out.println("A máquina está com " + quantidade + " Litro(s) de shampoo");
-    }
-
-    private static void verificarSeTemMáquinaDeAnimalDeEstimação() {
-        var hasPet = petMachine.hasPet();
-        System.out.println(hasPet ? "Tem pet na máquina" : "Não tem pet na máquina");
-    }
-
-    private static void definirPetNaMáquinaDePet() {
-        var nome = "";
-        enquanto (nome.isEmpty()) {
-            System.out.println("Informe o nome do animal de estimação:");
-            nome = scanner.next();
-        }
-
-        var pet = novo Pet(nome);
-        petMachine.setPet(pet);
-    }
-}
-
-package org.example;
-
-public class Pet {
-    private final String name;
-
-    private boolean clean;
-
-    public Pet(String name) {
-        this.name = name;
-        this.clean = false;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public boolean isClean() {
-        return clean;
-    }
-
-    public void setClean(boolean clean) {
-        this.clean = clean;
-    }
-}
-
-package org.example;
-
-public class PetMachine {
-    private boolean clean = true;
-    private int water = 30;
-    private int shampoo = 10;
-    private Pet pet;
-
-    public void takeAshower() {
-        if (this.pet == null) {
-            System.out.println("Coloque o Pet na máquina para iniciar o Banho");
-            return;
-        }
-        if (!clean) {
-            System.out.println("A máquina está suja! Limpe-a antes de dar banho.");
-            return;
-        }
-        if (water < 10 || shampoo < 2) {
-            System.out.println("Recursos insuficientes (Água ou Shampoo)!");
-            return;
-        }
-
-        this.water -= 10;
-        this.shampoo -= 2;
-        pet.setClean(true);
-        System.out.println("O Pet " + pet.getName() + " está limpo!");
-    }
-
-    public void addWater() {
-        if (water >= 30) {
-            System.out.println("A capacidade de Água está no máximo");
-            return;
-        }
-        water += 2;
-        System.out.println("Água adicionada!!! Nível atual: " + water);
-    }
-
-    public void addShampoo() {
-        if (shampoo >= 30) {
-            System.out.println("A capacidade de Shampoo está no máximo");
-            return;
-        }
-        shampoo += 2;
-        System.out.println("Shampoo adicionado !!! Nível atual: " + shampoo);
-    }
-
-    public int getWater() { return water; }
-    public int getShampoo() { return shampoo; }
-    public boolean hasPet() { return pet != null; }
-
-    public void setPet(Pet pet) {
-        if (!this.clean) {
-            System.out.println("A máquina está suja. Limpe-a antes de colocar o Pet.");
-            return;
-        }
-        if (hasPet()) {
-            System.out.println("O Pet " + this.pet.getName() + " já está na máquina.");
-            return;
-        }
-        this.pet = pet;
-        System.out.println("O pet " + pet.getName() + " foi colocado na máquina.");
-    }
-
-    public void removePet() {
-        if (pet == null) {
-            System.out.println("Não há pet para remover.");
-            return;
-        }
-        this.clean = !this.pet.isClean();
-        System.out.println("O pet " + this.pet.getName() + " foi retirado da máquina.");
-        this.pet = null;
-    }
-
-    public void wash() {
-        this.water -= 10;
-        this.shampoo -= 2;
-        this.clean = true;
-        System.out.println("A máquina está limpa!");
-    }
-}
+Main: Interface de usuário via console para interação com o sistema.
