@@ -19,7 +19,7 @@ public class Main {
         scanner.useDelimiter("\\n");
         var op = -1;
 
-        fazer {
+        do {
             System.out.println("\n============= MÁQUINA PET ===============");
             System.out.println("=========== Escolha uma das opções===========\n");
             System.out.println("1- Dar banho no pet");
@@ -49,33 +49,33 @@ public class Main {
                 default -> System.out.println("Opção inválida!");
             }
 
-        } enquanto (op != 0);
+        } while (op != 0);
     }
 
-    privado estático void definirÁgua() {
+    private estático void definirÁgua() {
         petMachine.addWater();
     }
 
-    privado estático void definirShampoo() {
+    private estático void definirShampoo() {
         petMachine.addShampoo();
     }
 
-    privado estático void verificarÁgua() {
+    private static void verificarÁgua() {
         var quantidade = petMachine.getWater();
         System.out.println("A máquina está com " + quantidade + " Litro(s) de água");
     }
 
-    privado estático void verificarXampu() {
+    private static void verificarXampu() {
         var amount = petMachine.getShampoo();
         System.out.println("A máquina está com " + quantidade + " Litro(s) de shampoo");
     }
 
-    privado estático void verificarSeTemMáquinaDeAnimalDeEstimação() {
+    private static void verificarSeTemMáquinaDeAnimalDeEstimação() {
         var hasPet = petMachine.hasPet();
         System.out.println(hasPet ? "Tem pet na máquina" : "Não tem pet na máquina");
     }
 
-    privado estático void definirPetNaMáquinaDePet() {
+    private static void definirPetNaMáquinaDePet() {
         var nome = "";
         enquanto (nome.isEmpty()) {
             System.out.println("Informe o nome do animal de estimação:");
